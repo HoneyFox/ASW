@@ -35,15 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BoosterSystem.cs" />
     <Compile Include="DepthChargeLibs.cs" />
     <Compile Include="DepthContorllerApplicationLauncher.cs" />
     <Compile Include="AswData.cs" />
     <Compile Include="ModGlobal.cs" />
     <Compile Include="ModUiManager.cs" />
     <Compile Include="ModuleAntiSubmarineWeapon.cs" />
+    <Compile Include="ModuleASROC.cs" />
     <Compile Include="ModuleDepthChargeProjector.cs" />
     <Compile Include="NASCategory.cs" />
     <Compile Include="NASCategoryModule.cs" />
+    <Compile Include="ParachuteSystem.cs" />
     <Compile Include="PartLoaderExtensions.cs" />
     <Compile Include="PidSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,19 +56,19 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>dlls\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\KSPLibrary\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>dlls\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\KSPLibrary\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="BDArmory, Version=1.1.0.23471, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BDArmory, Version=1.0.0.41073, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>dlls\BDArmory.dll</HintPath>
+      <HintPath>..\..\Kerbal Space Program\GameData\BDArmory\Plugins\BDArmory.dll</HintPath>
     </Reference>
     <Reference Include="KSPAssets, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>dlls\KSPAssets.dll</HintPath>
+      <HintPath>..\KSPLibrary\KSPAssets.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <HintPath>dlls\System.dll</HintPath>
@@ -75,14 +78,17 @@
     </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>dlls\UnityEngine.dll</HintPath>
+      <HintPath>..\KSPLibrary\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>dlls\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\KSPLibrary\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "D:\Kerbal Space Program\GameData\NAS\Plugins\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
