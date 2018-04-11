@@ -14,6 +14,7 @@ namespace AntiSubmarineWeapon
         protected float deployDuration;
         protected float deployAltitude;
         protected float armingDelay;
+        protected Vector3 dragOffset;
 
         private Rigidbody weaponRigidBody = null;
         private double launchTime = -1;
@@ -24,11 +25,12 @@ namespace AntiSubmarineWeapon
         private bool cutOff = false;
         public bool CutOff { get { return cutOff; } }
         
-        public ParachuteSystem(PartModule parentModule, Rigidbody weaponRigidBody, float dragCoefficient, float deployDuration, float deployAlt, float armingDelay)
+        public ParachuteSystem(PartModule parentModule, Rigidbody weaponRigidBody, float dragCoefficient, Vector3 dragOffset, float deployDuration, float deployAlt, float armingDelay)
         {
             this.parentModule = parentModule;
             this.weaponRigidBody = weaponRigidBody;
             this.dragCoefficient = dragCoefficient;
+            this.dragOffset = dragOffset;
             this.deployDuration = deployDuration;
             this.deployAltitude = deployAlt;
             this.armingDelay = armingDelay;
@@ -68,7 +70,7 @@ namespace AntiSubmarineWeapon
 
                     Vector3 dragForce = -parentModule.vessel.GetSrfVelocity().normalized *
                         0.5f * currentDragCoefficient * (float)parentModule.vessel.atmDensity * parentModule.vessel.GetSrfVelocity().sqrMagnitude;
-                    weaponRigidBody.AddForce(dragForce);
+                    weaponRigidBody.AddForceAtPosition(dragForce, parentModule.vessel.transform.TransformPoint(dragOffset));
                     if (parentModule.vessel.altitude < 0f)
                     {
                         // Cut the parachute.

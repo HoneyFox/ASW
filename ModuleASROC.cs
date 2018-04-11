@@ -34,6 +34,8 @@ namespace AntiSubmarineWeapon
         [KSPField(isPersistant = false)]
         public float dragCoefficient;
         [KSPField(isPersistant = false)]
+        public Vector3 dragOffset;
+        [KSPField(isPersistant = false)]
         public float deployDuration;
         [KSPField(isPersistant = false)]
         public float deployAltitude;
@@ -82,7 +84,8 @@ namespace AntiSubmarineWeapon
                         parachute = new ParachuteSystem(
                             this, 
                             partRigidBody, 
-                            dragCoefficient, 
+                            dragCoefficient,
+                            dragOffset,
                             deployDuration,
                             deployAltitude, 
                             armingDelay
@@ -99,8 +102,8 @@ namespace AntiSubmarineWeapon
                         parachute.OnActivate();
                         
                         // When weapon is launched, the target coordinates should be fed.
-                        if (missileModule.TargetAcquired)
-                            UpdateTargetCoords(missileModule.TargetPosition);
+                        if (missileModule.radarTarget.exists)
+                            UpdateTargetCoords(missileModule.radarTarget.predictedPosition);
                         else if (missileModule.legacyTargetVessel != null)
                             UpdateTargetCoords(missileModule.legacyTargetVessel.GetWorldPos3D());
                     }
