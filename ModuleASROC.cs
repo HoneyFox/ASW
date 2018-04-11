@@ -110,12 +110,11 @@ namespace AntiSubmarineWeapon
                         parachute.OnFixedUpdate();
 
                         // Guidance and aero calculation.
-                        CalculateTrajectory(targetCoords);
+                        if(parachute.Deployed == false)
+                            CalculateTrajectory(targetCoords);
                         Vector3 aeroForceDir = vessel.transform.forward.normalized - vessel.GetSrfVelocity().normalized;
                         Vector3 aeroForce = aeroForceDir * 0.5f * normalCoefficient * (float)vessel.atmDensity * vessel.GetSrfVelocity().sqrMagnitude;
-                        Debug.Log(aeroForceDir.ToString() + " " + aeroForce.ToString());
                         partRigidBody.AddForce(aeroForce);
-
                     }
                 }
             }

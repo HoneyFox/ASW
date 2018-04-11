@@ -20,7 +20,9 @@ namespace AntiSubmarineWeapon
         private float currentDragCoefficient = 0f;
         private float deployRate = 0f;
         private bool deployed = false;
+        public bool Deployed { get { return deployed; } }
         private bool cutOff = false;
+        public bool CutOff { get { return cutOff; } }
         
         public ParachuteSystem(PartModule parentModule, Rigidbody weaponRigidBody, float dragCoefficient, float deployDuration, float deployAlt, float armingDelay)
         {
